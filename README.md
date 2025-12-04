@@ -11,9 +11,12 @@ This is the initial project setup with a clean folder structure, placeholder com
 - **Framework:** Next.js 14 (App Router)
 - **Language:** TypeScript
 - **Styling:** Tailwind CSS
-- **Components:** ShadCN-style UI structure (`ui` & `common` folders)
+- **UI Components:** ShadCN-style (ui & common)
+- **Animations:** Framer Motion
+- **Backend:** Next.js API Routes
+- **Database:** MongoDB Atlas / Prisma
 - **Package Manager:** npm
-- **Deployment Target:** Vercel
+- **Deployment:** Vercel
 
 ---
 
