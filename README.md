@@ -6,19 +6,57 @@ This is the initial project setup with a clean folder structure, placeholder com
 
 ---
 
-## Tech Stack
+## 🛠 Tech Stack – iete-rvce.org
 
-- **Framework:** Next.js 14 (App Router)
-- **Language:** TypeScript
-- **Styling:** Tailwind CSS
-- **UI Components:** ShadCN-style (ui & common)
-- **Animations:** Framer Motion
-- **Backend:** Next.js API Routes
-- **Database:** MongoDB Atlas / Prisma
-- **Package Manager:** npm
-- **Deployment:** Vercel
+**Framework**
+- Next.js 14 (App Router)
+- Static export using `next build && next export`
 
----
+**Language**
+- TypeScript (strict)
 
-## Folder Structure
+**Styling**
+- Tailwind CSS
+- `clsx` + `tailwind-merge` for className composition
+
+**UI Components**
+- shadcn/ui for base UI components
+- Custom shared components in `components/common`
+
+**Animations**
+- Framer Motion
+
+**Forms & Validation**
+- React Hook Form
+- Zod
+
+**Data**
+- Static JSON and MDX content stored in `/data` and `/content`
+
+**Backend**
+- Node.js + Express REST API
+- Hosted separately from frontend
+- Handles:
+  - Contact form submissions
+  - Event registrations
+  - Admin-managed data input
+
+**Database**
+- MongoDB Atlas
+- Prisma ORM
+
+**Images**
+- Next.js `next/image` with `unoptimized: true`
+- All assets stored in `/public`
+
+**Package Manager**
+- npm
+
+**Deployment**
+- Frontend: GitHub Pages (`iete-rvce.github.io`)
+- Static output generated in `/out`
+- Deployed via GitHub Actions
+- Backend: Hosted externally
+- Custom domain configured using `CNAME` as `iete-rvce.org`
+
 
