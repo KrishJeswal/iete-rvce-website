@@ -31,7 +31,7 @@ This is the initial project setup with a clean folder structure, placeholder com
 - Zod
 
 **Data**
-- Static JSON and MDX content stored in `/data` and `/content`
+- Static JSON and MDX content stored in `/src/data` and `/src/content`
 
 **Backend**
 - Node.js + Express REST API
