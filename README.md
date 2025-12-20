@@ -1,62 +1,29 @@
 # IETE RVCE Official Website
 
-This repository contains the source code for the **IETE RVCE Student Chapter Website**, built using **Next.js 14 (App Router)**, **Tailwind CSS**, and **TypeScript**.
-
-This is the initial project setup with a clean folder structure, placeholder components, and ready-to-build configuration.
+This repository contains the complete codebase for the official website of the Institution of Electronics and Telecommunication Engineers (IETE) – RVCE Chapter. The project is maintained as a single repository that includes the existing frontend, backend serverless APIs, and database schema/configuration to ensure long-term maintainability and smooth handover between committees.
 
 ---
 
-## 🛠 Tech Stack – iete-rvce.org
+## Repository Overview
 
-**Framework**
-- Next.js 14 (App Router)
-- Static export using `next build && next export`
+This project follows a monorepo structure with a clear separation of concerns:
+- The frontend is a static website copied as-is from the original `IETE-rvce-website-frontend` repository.
+- The backend is implemented using serverless functions.
+- The database schema and security rules are version-controlled within this repository.
 
-**Language**
-- TypeScript (strict)
+---
 
-**Styling**
-- Tailwind CSS
-- `clsx` + `tailwind-merge` for className composition
+# IETE RVCE Official Website
 
-**UI Components**
-- shadcn/ui for base UI components
-- Custom shared components in `components/common`
+This repository contains the complete codebase for the official website of the Institution of Electronics and Telecommunication Engineers (IETE) – RVCE Chapter. The project is maintained as a single repository that includes the existing frontend, backend serverless APIs, and database schema/configuration to ensure long-term maintainability and smooth handover between committees.
 
-**Animations**
-- Framer Motion
+---
 
-**Forms & Validation**
-- React Hook Form
-- Zod
+## Repository Overview
 
-**Data**
-- Static JSON and MDX content stored in `/src/data` and `/src/content`
+This project follows a monorepo structure with a clear separation of concerns:
+- The frontend is a static website copied as-is from the original `IETE-rvce-website-frontend` repository.
+- The backend is implemented using serverless functions.
+- The database schema and security rules are version-controlled within this repository.
 
-**Backend**
-- Node.js + Express REST API
-- Hosted separately from frontend
-- Handles:
-  - Contact form submissions
-  - Event registrations
-  - Admin-managed data input
-
-**Database**
-- MongoDB Atlas
-- Prisma ORM
-
-**Images**
-- Next.js `next/image` with `unoptimized: true`
-- All assets stored in `/public`
-
-**Package Manager**
-- npm
-
-**Deployment**
-- Frontend: GitHub Pages (`iete-rvce.github.io`)
-- Static output generated in `/out`
-- Deployed via GitHub Actions
-- Backend: Hosted externally
-- Custom domain configured using `CNAME` as `iete-rvce.org`
-
-
+---
