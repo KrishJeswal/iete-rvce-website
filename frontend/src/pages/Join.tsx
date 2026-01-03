@@ -1,7 +1,17 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
-import { ArrowLeft, User, Mail, Phone, GraduationCap, Building, Calendar, Send, CheckCircle } from 'lucide-react';
+import {
+  ArrowLeft,
+  User,
+  Mail,
+  Phone,
+  GraduationCap,
+  Building,
+  Calendar,
+  Send,
+  CheckCircle,
+} from 'lucide-react';
 import ParticleNetwork from '@/components/ParticleNetwork';
 import Navbar from '@/components/Navbar';
 
@@ -17,14 +27,50 @@ const Join = () => {
   });
 
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState<string | null>(null);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setIsSubmitted(true);
+    if (isSubmitting) return;
+
+    setIsSubmitting(true);
+    setSubmitError(null);
+
+    try {
+      // Map your frontend keys -> API expected keys
+      const payload = {
+        full_name: formData.fullName,
+        email: formData.email,
+        phone: formData.phone,
+        usn: formData.usn,
+        department: formData.department,
+        year: formData.year,
+        membership_type: formData.membershipType,
+      };
+
+      const res = await fetch('/api/join', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+      });
+
+      const data = await res.json().catch(() => ({}));
+
+      if (!res.ok) {
+        throw new Error(data?.error || 'Submission failed');
+      }
+
+      setIsSubmitted(true);
+    } catch (err: any) {
+      setSubmitError(err?.message || 'Something went wrong');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   if (isSubmitted) {
@@ -46,7 +92,8 @@ const Join = () => {
               Application Submitted!
             </h1>
             <p className="font-sans text-muted-foreground mb-8">
-              Thank you for your interest in IETE-RVCE. We'll review your application and get back to you soon.
+              Thank you for your interest in IETE-RVCE. We'll review your application and get
+              back to you soon.
             </p>
             <Link
               to="/"
@@ -113,11 +160,13 @@ const Join = () => {
                         value={formData.fullName}
                         onChange={handleChange}
                         required
-                        className="w-full px-4 py-3 rounded-xl bg-muted border border-border/50 text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all"
+                        disabled={isSubmitting}
+                        className="w-full px-4 py-3 rounded-xl bg-muted border border-border/50 text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all disabled:opacity-60"
                         placeholder="Enter your full name"
                       />
                     </div>
                   </div>
+
                   <div className="space-y-2">
                     <label className="font-heading text-sm font-medium text-foreground">
                       Email Address *
@@ -130,11 +179,13 @@ const Join = () => {
                         value={formData.email}
                         onChange={handleChange}
                         required
-                        className="w-full pl-11 pr-4 py-3 rounded-xl bg-muted border border-border/50 text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all"
+                        disabled={isSubmitting}
+                        className="w-full pl-11 pr-4 py-3 rounded-xl bg-muted border border-border/50 text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all disabled:opacity-60"
                         placeholder="you@rvce.edu.in"
                       />
                     </div>
                   </div>
+
                   <div className="space-y-2">
                     <label className="font-heading text-sm font-medium text-foreground">
                       Phone Number *
@@ -147,22 +198,23 @@ const Join = () => {
                         value={formData.phone}
                         onChange={handleChange}
                         required
-                        className="w-full pl-11 pr-4 py-3 rounded-xl bg-muted border border-border/50 text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all"
+                        disabled={isSubmitting}
+                        className="w-full pl-11 pr-4 py-3 rounded-xl bg-muted border border-border/50 text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all disabled:opacity-60"
                         placeholder="+91 XXXXX XXXXX"
                       />
                     </div>
                   </div>
+
                   <div className="space-y-2">
-                    <label className="font-heading text-sm font-medium text-foreground">
-                      USN *
-                    </label>
+                    <label className="font-heading text-sm font-medium text-foreground">USN *</label>
                     <input
                       type="text"
                       name="usn"
                       value={formData.usn}
                       onChange={handleChange}
                       required
-                      className="w-full px-4 py-3 rounded-xl bg-muted border border-border/50 text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all"
+                      disabled={isSubmitting}
+                      className="w-full px-4 py-3 rounded-xl bg-muted border border-border/50 text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all disabled:opacity-60"
                       placeholder="1RVXXYYXXX"
                     />
                   </div>
@@ -187,7 +239,8 @@ const Join = () => {
                         value={formData.department}
                         onChange={handleChange}
                         required
-                        className="w-full pl-11 pr-4 py-3 rounded-xl bg-muted border border-border/50 text-foreground focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all appearance-none cursor-pointer"
+                        disabled={isSubmitting}
+                        className="w-full pl-11 pr-4 py-3 rounded-xl bg-muted border border-border/50 text-foreground focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all appearance-none cursor-pointer disabled:opacity-60"
                       >
                         <option value="">Select Department</option>
                         <option value="ece">ECE</option>
@@ -201,6 +254,7 @@ const Join = () => {
                       </select>
                     </div>
                   </div>
+
                   <div className="space-y-2">
                     <label className="font-heading text-sm font-medium text-foreground">
                       Year *
@@ -212,7 +266,8 @@ const Join = () => {
                         value={formData.year}
                         onChange={handleChange}
                         required
-                        className="w-full pl-11 pr-4 py-3 rounded-xl bg-muted border border-border/50 text-foreground focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all appearance-none cursor-pointer"
+                        disabled={isSubmitting}
+                        className="w-full pl-11 pr-4 py-3 rounded-xl bg-muted border border-border/50 text-foreground focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all appearance-none cursor-pointer disabled:opacity-60"
                       >
                         <option value="">Select Year</option>
                         <option value="1">1st Year</option>
@@ -222,6 +277,7 @@ const Join = () => {
                       </select>
                     </div>
                   </div>
+
                   <div className="space-y-2">
                     <label className="font-heading text-sm font-medium text-foreground">
                       Membership Type *
@@ -231,7 +287,8 @@ const Join = () => {
                       value={formData.membershipType}
                       onChange={handleChange}
                       required
-                      className="w-full px-4 py-3 rounded-xl bg-muted border border-border/50 text-foreground focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all appearance-none cursor-pointer"
+                      disabled={isSubmitting}
+                      className="w-full px-4 py-3 rounded-xl bg-muted border border-border/50 text-foreground focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all appearance-none cursor-pointer disabled:opacity-60"
                     >
                       <option value="fg">Forum Graduate (FG)</option>
                       <option value="fd">Forum Diploma (FD)</option>
@@ -240,13 +297,21 @@ const Join = () => {
                 </div>
               </div>
 
+              {/* Error */}
+              {submitError && (
+                <p className="text-sm text-red-500 mt-2">
+                  {submitError}
+                </p>
+              )}
+
               {/* Submit Button */}
               <div className="pt-4">
                 <button
                   type="submit"
-                  className="group w-full inline-flex items-center justify-center gap-3 px-8 py-4 rounded-xl font-heading font-semibold text-lg bg-gradient-to-r from-primary to-accent text-primary-foreground transition-all hover:shadow-xl hover:shadow-primary/30 hover:scale-[1.02]"
+                  disabled={isSubmitting}
+                  className="group w-full inline-flex items-center justify-center gap-3 px-8 py-4 rounded-xl font-heading font-semibold text-lg bg-gradient-to-r from-primary to-accent text-primary-foreground transition-all hover:shadow-xl hover:shadow-primary/30 hover:scale-[1.02] disabled:opacity-70 disabled:hover:scale-100"
                 >
-                  Submit Application
+                  {isSubmitting ? 'Submitting…' : 'Submit Application'}
                   <Send className="w-5 h-5 transition-transform group-hover:translate-x-1" />
                 </button>
               </div>

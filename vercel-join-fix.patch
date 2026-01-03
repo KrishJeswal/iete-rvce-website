@@ -1,0 +1,145 @@
+--- a/frontend/package.json
++++ b/frontend/package.json
+@@ -63,7 +63,8 @@
+     "tailwindcss-animate": "^1.0.7",
+     "three": "^0.182.0",
+     "vaul": "^0.9.9",
+-    "zod": "^3.25.76"
++    "zod": "^3.25.76",
++    "@vercel/postgres": "^0.10.0"
+   },
+   "devDependencies": {
+     "@eslint/js": "^9.32.0",
+--- a/frontend/src/pages/Join.tsx
++++ b/frontend/src/pages/Join.tsx
+@@ -16,15 +16,39 @@
+     membershipType: 'fg',
+   });
+ 
+-  const [isSubmitted, setIsSubmitted] = useState(false);
++  
++  const [isSubmitting, setIsSubmitting] = useState(false);
++  const [submitError, setSubmitError] = useState<string | null>(null);
++const [isSubmitted, setIsSubmitted] = useState(false);
+ 
+   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+     setFormData({ ...formData, [e.target.name]: e.target.value });
+   };
+ 
+-  const handleSubmit = (e: React.FormEvent) => {
++  const handleSubmit = async (e: React.FormEvent) => {
+     e.preventDefault();
+-    setIsSubmitted(true);
++    setSubmitError(null);
++    setIsSubmitting(true);
++
++    try {
++      const res = await fetch('/api/join', {
++        method: 'POST',
++        headers: { 'Content-Type': 'application/json' },
++        body: JSON.stringify(formData),
++      });
++
++      const data = await res.json().catch(() => ({}));
++      if (!res.ok) {
++        setSubmitError(data?.error || 'Submission failed. Please try again.');
++        return;
++      }
++
++      setIsSubmitted(true);
++    } catch (err) {
++      setSubmitError('Network error. Please check your connection and try again.');
++    } finally {
++      setIsSubmitting(false);
++    }
+   };
+ 
+   if (isSubmitted) {
+@@ -243,10 +267,14 @@
+               {/* Submit Button */}
+               <div className="pt-4">
+                 <button
+-                  type="submit"
++            {submitError && (
++              <p className="mt-3 text-sm text-red-400" role="alert">{submitError}</p>
++            )}
++
++                  type="submit" disabled={isSubmitting} aria-busy={isSubmitting}
+                   className="group w-full inline-flex items-center justify-center gap-3 px-8 py-4 rounded-xl font-heading font-semibold text-lg bg-gradient-to-r from-primary to-accent text-primary-foreground transition-all hover:shadow-xl hover:shadow-primary/30 hover:scale-[1.02]"
+                 >
+-                  Submit Application
++                  {isSubmitting ? 'Submitting…' : 'Submit Application'}
+                   <Send className="w-5 h-5 transition-transform group-hover:translate-x-1" />
+                 </button>
+               </div>
+--- a/dev/null
++++ b/frontend/api/join.ts
+@@ -0,0 +1,68 @@
++import { sql } from '@vercel/postgres';
++import { z } from 'zod';
++
++// NOTE: This runs as a Vercel Serverless Function at /api/join
++// It persists Join form submissions into Vercel Postgres.
++
++const JoinSchema = z.object({
++  fullName: z.string().min(1).max(120),
++  email: z.string().email().max(200),
++  phone: z.string().min(5).max(40),
++  usn: z.string().min(1).max(40),
++  department: z.string().min(1).max(40),
++  year: z.union([z.string(), z.number()]),
++  membershipType: z.string().min(1).max(20),
++});
++
++export default async function handler(req: any, res: any) {
++  // Basic CORS (useful if the form is ever embedded elsewhere)
++  res.setHeader('Access-Control-Allow-Origin', '*');
++  res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
++  res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
++
++  if (req.method === 'OPTIONS') return res.status(204).end();
++  if (req.method !== 'POST') return res.status(405).json({ error: 'Method not allowed' });
++
++  try {
++    const parsed = JoinSchema.safeParse(req.body);
++    if (!parsed.success) {
++      return res.status(400).json({
++        error: 'Invalid form data. Please check your inputs and try again.',
++      });
++    }
++
++    const body = parsed.data;
++    const yearNum = Number(body.year);
++    if (!Number.isFinite(yearNum) || yearNum < 1 || yearNum > 6) {
++      return res.status(400).json({ error: 'Invalid year.' });
++    }
++
++    const userAgent = String(req.headers['user-agent'] || '').slice(0, 400);
++    const ip = String(
++      req.headers['x-forwarded-for'] || req.headers['x-real-ip'] || req.socket?.remoteAddress || ''
++    ).slice(0, 100);
++
++    // Insert into table. Create it once from Vercel Postgres SQL editor.
++    await sql`
++      INSERT INTO join_applications (
++        full_name, email, phone, usn, department, year, membership_type, user_agent, ip
++      ) VALUES (
++        ${body.fullName.trim()},
++        ${body.email.trim().toLowerCase()},
++        ${body.phone.trim()},
++        ${body.usn.trim().toUpperCase()},
++        ${body.department},
++        ${yearNum},
++        ${body.membershipType},
++        ${userAgent},
++        ${ip}
++      )
++    `;
++
++    return res.status(200).json({ ok: true });
++  } catch (err) {
++    // eslint-disable-next-line no-console
++    console.error('Join submission error:', err);
++    return res.status(500).json({ error: 'Server error. Please try again in a bit.' });
++  }
++}
