@@ -38,7 +38,7 @@ Success confirmation is shown to the user
 
 Applicant data is not publicly accessible.
 
-### Project Structure
+## Project Structure
 frontend/
   api/
     join.ts
@@ -56,7 +56,7 @@ cd frontend
 npm install
 npm run dev
 
-### Deployment (Vercel)
+## Deployment (Vercel)
 
 Import the repo into Vercel
 
@@ -70,7 +70,7 @@ Run the required table creation SQL
 
 Redeploy once
 
-### Viewing Applications
+## Viewing Applications
 
 Applications are stored in Vercel Postgres.
 
@@ -89,6 +89,6 @@ Share applicant data via CSV exports, not direct DB access
 
 node_modules and large files are ignored
 
-### Maintainers
+## Maintainers
 
 IETE-RVCE Website Development Team
