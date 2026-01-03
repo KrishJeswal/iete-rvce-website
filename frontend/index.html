@@ -1,246 +1,32 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description"
-        content="IETE-RVCE Student Chapter - Fostering innovation and technical excellence in electronics and telecommunication engineering at RVCE, Bengaluru">
-    <meta name="theme-color" content="#1a365d">
-    <title>IETE-RVCE | Student Chapter</title>
-
-    <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Open+Sans:wght@400;500;600&display=swap"
-        rel="stylesheet">
-
-    <!-- Three.js for 3D Globe -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-
-    <link rel="stylesheet" href="styles.css">
-</head>
-
-<body>
-    <!-- Navigation -->
-    <nav class="navbar" id="navbar">
-        <div class="nav-container">
-            <div class="nav-brand">
-                <img src="assets/rvce_logo_ieee.png" alt="RVCE Logo" class="rvce-logo">
-                <span class="brand-iete">IETE</span>
-                <span class="brand-separator">–</span>
-                <span class="brand-rvce">RVCE</span>
-            </div>
-
-            <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
-                <span class="hamburger"></span>
-                <span class="hamburger"></span>
-                <span class="hamburger"></span>
-            </button>
-
-            <div class="nav-menu" id="navMenu">
-                <a href="#home" class="nav-link active">Home</a>
-                <a href="#about" class="nav-link">About</a>
-                <a href="#team" class="nav-link">Team</a>
-                <a href="#events" class="nav-link">Events</a>
-                <a href="#membership" class="nav-link">Membership</a>
-                <a href="#resources" class="nav-link">Resources</a>
-                <a href="#contact" class="nav-link">Contact</a>
-                <a href="#join" class="nav-cta">Join IETE-RVCE</a>
-            </div>
-        </div>
-    </nav>
-
-    <!-- Hero Section -->
-    <section class="hero" id="home">
-        <div class="hero-visual">
-            <canvas id="globeCanvas"></canvas>
-            <div class="map-label">
-                <div class="map-marker"></div>
-                <span>Bengaluru, Karnataka</span>
-            </div>
-        </div>
-        <div class="hero-container">
-            <div class="hero-content">
-                <h1 class="hero-title">
-                    Empowering Engineering Excellence at RVCE
-                </h1>
-                <p class="hero-subtitle">
-                    IETE-RVCE is a student-driven technical community fostering innovation,
-                    research, and professional development in electronics and telecommunication
-                    engineering across India.
-                </p>
-                <div class="hero-actions">
-                    <a href="#join" class="btn btn-primary">Join Our Chapter</a>
-                    <a href="#events" class="btn btn-secondary">Explore Events</a>
-                </div>
-            </div>
-
-
-        </div>
-    </section>
-
-    <!-- Stats Section -->
-    <section class="stats">
-        <div class="stats-container">
-            <div class="stat-item">
-                <div class="stat-number">500+</div>
-                <div class="stat-label">Active Members</div>
-            </div>
-            <div class="stat-item">
-                <div class="stat-number">120+</div>
-                <div class="stat-label">Events Conducted</div>
-            </div>
-            <div class="stat-item">
-                <div class="stat-number">75+</div>
-                <div class="stat-label">Workshops & Talks</div>
-            </div>
-            <div class="stat-item">
-                <div class="stat-number">15+</div>
-                <div class="stat-label">Years Active</div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Highlights Section -->
-    <section class="highlights" id="events">
-        <div class="highlights-container">
-            <h2 class="section-title">What We Do</h2>
-            <p class="section-subtitle">Building technical competence and professional networks</p>
-
-            <div class="highlights-grid">
-                <div class="highlight-card">
-                    <div class="card-icon">
-                        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                            stroke-width="2">
-                            <rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect>
-                            <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path>
-                        </svg>
-                    </div>
-                    <h3 class="card-title">Technical Workshops</h3>
-                    <p class="card-description">
-                        Hands-on sessions covering emerging technologies, circuit design,
-                        embedded systems, and industry-standard tools.
-                    </p>
-                </div>
-
-                <div class="highlight-card">
-                    <div class="card-icon">
-                        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                            stroke-width="2">
-                            <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
-                            <polyline points="2 17 12 22 22 17"></polyline>
-                            <polyline points="2 12 12 17 22 12"></polyline>
-                        </svg>
-                    </div>
-                    <h3 class="card-title">Student Projects</h3>
-                    <p class="card-description">
-                        Collaborative research and development initiatives addressing
-                        real-world challenges in electronics and communication.
-                    </p>
-                </div>
-
-                <div class="highlight-card">
-                    <div class="card-icon">
-                        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                            stroke-width="2">
-                            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
-                            <circle cx="9" cy="7" r="4"></circle>
-                            <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
-                            <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
-                        </svg>
-                    </div>
-                    <h3 class="card-title">Industry Talks</h3>
-                    <p class="card-description">
-                        Expert sessions with industry professionals sharing insights on
-                        career paths, emerging trends, and professional development.
-                    </p>
-                </div>
-
-                <div class="highlight-card">
-                    <div class="card-icon">
-                        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                            stroke-width="2">
-                            <path d="M12 2L2 7l10 5 10-5-10-5z"></path>
-                            <path d="M2 17l10 5 10-5M2 12l10 5 10-5"></path>
-                        </svg>
-                    </div>
-                    <h3 class="card-title">Competitions & Hackathons</h3>
-                    <p class="card-description">
-                        Technical competitions and hackathons fostering innovation,
-                        problem-solving, and collaborative engineering.
-                    </p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer class="footer" id="contact">
-        <div class="footer-container">
-            <div class="footer-section">
-                <h3 class="footer-title">About IETE-RVCE</h3>
-                <p class="footer-text">
-                    The IETE-RVCE student chapter is dedicated to advancing knowledge
-                    in electronics and telecommunication engineering through technical
-                    activities, workshops, and professional networking.
-                </p>
-            </div>
-
-            <div class="footer-section">
-                <h3 class="footer-title">Quick Links</h3>
-                <ul class="footer-links">
-                    <li><a href="#about">About Us</a></li>
-                    <li><a href="#team">Our Team</a></li>
-                    <li><a href="#events">Events</a></li>
-                    <li><a href="#membership">Membership</a></li>
-                    <li><a href="#resources">Resources</a></li>
-                </ul>
-            </div>
-
-            <div class="footer-section">
-                <h3 class="footer-title">Contact</h3>
-                <ul class="footer-contact">
-                    <li>RVCE Campus, Bengaluru</li>
-                    <li>Karnataka 560059, India</li>
-                    <li>iete@rvce.edu.in</li>
-                    <li>+91 80 1234 5678</li>
-                </ul>
-            </div>
-
-            <div class="footer-section">
-                <h3 class="footer-title">Connect</h3>
-                <div class="footer-social">
-                    <a href="#" class="social-link" aria-label="LinkedIn">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
-                            <path
-                                d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" />
-                        </svg>
-                    </a>
-                    <a href="#" class="social-link" aria-label="Instagram">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
-                            <path
-                                d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" />
-                        </svg>
-                    </a>
-                    <a href="#" class="social-link" aria-label="Twitter">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
-                            <path
-                                d="M23 3a10.9 10.9 0 01-3.14 1.53 4.48 4.48 0 00-7.86 3v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2c9 5 20 0 20-11.5a4.5 4.5 0 00-.08-.83A7.72 7.72 0 0023 3z" />
-                        </svg>
-                    </a>
-                </div>
-            </div>
-        </div>
-
-        <div class="footer-bottom">
-            <p>&copy; 2025 IETE-RVCE Student Chapter. All rights reserved.</p>
-        </div>
-    </footer>
-
-    <script src="script.js"></script>
-</body>
-
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>IETE-RVCE | Student Technical Community</title>
+    <meta name="description" content="IETE-RVCE is a student-driven technical community fostering innovation, research, and professional development in electronics and telecommunication engineering at RVCE, Bengaluru." />
+    <meta name="keywords" content="IETE, RVCE, student forum, technical community, electronics, telecommunication, engineering, Bengaluru" />
+    <meta name="author" content="IETE-RVCE Student Chapter" />
+    
+    <!-- Open Graph / Social Media -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="IETE-RVCE | Student Technical Community" />
+    <meta property="og:description" content="Join IETE-RVCE - A student-driven technical community empowering engineering excellence at RVCE." />
+    <meta property="og:site_name" content="IETE-RVCE" />
+    <meta property="og:image" content="/placeholder.svg" />
+    
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:site" content="@IETE_RVCE" />
+    <meta name="twitter:image" content="/placeholder.svg" />
+    
+    <!-- Canonical -->
+    <link rel="canonical" href="https://iete-rvce.com" />
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="/public/favicon.ico" />
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
 </html>
-<script src="globe.js"></script>
