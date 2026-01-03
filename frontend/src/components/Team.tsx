@@ -44,7 +44,7 @@ const teamMembers: TeamMember[] = [
     image: teamVijay,
     linkedin: 'https://in.linkedin.com/in/vjsud',
     email: 'vijaysudarshanb.et23@rvce.edu.in',
-  },
+  }
 ];
 
 

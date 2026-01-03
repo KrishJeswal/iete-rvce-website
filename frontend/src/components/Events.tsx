@@ -89,7 +89,6 @@ const Events = () => {
                     {event.subtitle}
                   </p>
                 </div>
-
                 <p className="font-sans text-sm text-muted-foreground leading-relaxed mb-6 line-clamp-3 flex-grow">
                   {event.description}
                 </p>
