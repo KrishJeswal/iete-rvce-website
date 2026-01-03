@@ -38,4 +38,4 @@ This project follows a monorepo structure with a clear separation of concerns:
 - Supabase Storage (optional, for images and media)
 
 ### Deployment
-- Netlify (static hosting and serverless functions)
+- Vercel (static hosting and serverless functions)
