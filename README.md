@@ -56,39 +56,6 @@ cd frontend
 npm install
 npm run dev
 
-## Deployment (Vercel)
-
-Import the repo into Vercel
-
-Set Root Directory to frontend
-
-Deploy
-
-Create and attach a Vercel Postgres database
-
-Run the required table creation SQL
-
-Redeploy once
-
-## Viewing Applications
-
-Applications are stored in Vercel Postgres.
-
-SELECT * 
-FROM join_applications 
-ORDER BY created_at DESC;
-
-
-Data can be exported as CSV for internal use.
-
-Notes
-
-Only authorized project members can access application data
-
-Share applicant data via CSV exports, not direct DB access
-
-node_modules and large files are ignored
-
 ## Maintainers
 
 IETE-RVCE Website Development Team
