@@ -158,22 +158,6 @@ const EventsPage = () => {
                         ))}
                       </ul>
                     </div>
-
-                    {/* CTA Card */}
-                    <div className="rounded-2xl bg-gradient-to-br from-primary/20 to-secondary/20 border border-primary/30 p-6">
-                      <h3 className="font-display text-lg font-bold text-foreground mb-2">
-                        Want to participate?
-                      </h3>
-                      <p className="text-sm text-muted-foreground mb-4">
-                        Join IETE-RVCE to get access to all upcoming events and workshops.
-                      </p>
-                      <Link
-                        to="/join"
-                        className="inline-flex items-center justify-center w-full px-6 py-3 rounded-xl font-heading font-semibold bg-gradient-to-r from-primary to-accent text-primary-foreground transition-all hover:shadow-lg hover:shadow-primary/30"
-                      >
-                        Join Now
-                      </Link>
-                    </div>
                   </div>
                 </motion.div>
               </div>
