@@ -17,12 +17,12 @@ const EventsPage = () => {
     fullDescription: [
       'We kicked it off with caffeine and chaos, judged the wild ideas with even wilder criteria, and wrapped it up with results that shocked even our code.',
       'And yes, swipe to meet the sleep-deprived legends who made it all happen—our organising team!',
-      'The hackathon featured multiple tracks including Web Development, App Development, and IoT projects. Teams had 24 hours to build innovative solutions to real-world problems.'
+      'The hackathon featured multiple tracks including Web Development, App Development, and IoT projects. Teams had 12 hours to build innovative solutions to real-world problems.'
     ],
     image: eventImage,
     tags: ['Hackathon', 'Coding', 'Competition', 'Tech'],
     highlights: [
-      '24-hour coding marathon',
+      '12-hour coding marathon',
       'Expert mentorship sessions',
       'Exciting prizes and goodies',
       'Networking opportunities',
